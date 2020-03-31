@@ -1,0 +1,57 @@
+<div class='card'>
+    <div class='card-header'>
+      {{pageTitle}}
+    </div>
+    <div class='card-body'>
+      <div class='row'>
+        <div class='col-md-2'>Filter by:</div>
+        <div class='col-md-4'>
+          <input type='text'
+                 [(ngModel)]='listFilter' />
+        </div>
+      </div>
+      <div class='row'
+           *ngIf='listFilter'>
+        <div class='col-md-6'>
+          <h4>Filtered by: {{listFilter}}</h4>
+        </div>
+      </div>
+      <div class='table-responsive' style="overflow-y: scroll;height:100vh">
+       <!-- <table class='table'
+               *ngIf='products && products.length'> -->
+        <table class='table' style="border: 3px solid gray">
+          <thead>
+            <tr>
+              <th>Country</th>
+              <th>Confirmed</th>
+              <th>Active</th>
+              <th>Recovered</th>
+              <th>Deaths</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor='let eachObj of filteredResult'>
+              <!--<td>
+                <img *ngIf='showImage'
+                     [src]='product.imageUrl'
+                     [title]='product.productName'
+                     [style.width.px]='imageWidth'
+                     [style.margin.px]='imageMargin'>
+              </td>-->
+              <!--<td><img *ngIf='showImage' src={{product.imageUrl}} [title]='productName' [style.width.px]='imageWidth' [style.margin.px]='imageMargin'/></td> -->
+             <!-- <td><a [routerLink]="['/products',product.productId]">{{product.productName}}</a></td>-->
+			  <td><a [routerLink]="['/country',eachObj.country]">{{eachObj.country}}</a></td>
+              <td>{{eachObj.confirmed}}</td>
+              <td>{{eachObj.active}}</td>
+              <td>{{eachObj.recovered}}</td>
+              <td>{{eachObj.deaths}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div *ngIf='errorMessage'
+       class='alert alert-danger'>
+    Error: {{ errorMessage }}
+  </div>

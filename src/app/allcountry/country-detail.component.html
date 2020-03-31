@@ -1,0 +1,41 @@
+<!--<div class='card'>
+    <div class='card-header'>
+        {{pageTitle }}
+    </div>
+    <div #gmap style="width:100%;height:400px;float:right;background:green"></div>
+    <div class="card-footer">
+        <button class='btn btn-outline-secondary'
+            (click)='onBack()'
+            style='width:80px'>
+            <i class='fa fa-chevron-left'></i>Back
+        </button>
+
+    </div>
+
+</div> -->
+
+<div class='card'>
+    <div class='card-header'>
+        {{pageTitle }}
+    </div>
+    <div #gmap style="width:100%;height:400px;float:right;margin-bottom:5px ;"></div>
+    <div *ngIf="filteredNews">
+        <div style="background:#ffcc99;margin-right:5px;margin-left:5px" *ngFor="let newsitem of filteredNews">
+        <a target="_blank" href={{newsitem.url}}>
+            <h5>{{newsitem.title}}</h5>
+            <p>{{newsitem.desc}}</p>
+        </a>
+        </div>
+    </div>
+   
+	
+    <div class="card-footer">
+        <button class='btn btn-outline-secondary'
+            (click)='onBack()'
+            style='width:80px'>
+            <i class='fa fa-chevron-left'></i>Back
+        </button>
+
+    </div>
+
+</div>

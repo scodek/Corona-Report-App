@@ -1,0 +1,33 @@
+<!--<div>
+    <div class="row">
+        <h2 class="header">World-wide report on Corona Virus(COVID - 19)</h2>
+    </div>
+    <div class="row"> -->
+        <!--<nav class='navbar navbar-expand navbar-light bg-dark'>-->
+          <!--  <nav class='navbar navbar-expand'>
+            <a class='navbar-brand'>Corona Report</a>
+            <ul class='nav nav-pills' style="color:red">
+                <li><a class="nav-link" routerLink="/home" routerLinkActive="active">Home</a></li>
+                <li><a class='nav-link' routerLink="/countries" routerLinkActive="active">Affected Countries List view</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class='container'>
+        <router-outlet></router-outlet>
+    </div>
+</div> -->
+
+<nav class='navbar navbar-expand' style="background:#ffbf80">
+    <a class='navbar-brand'>{{pageTitle}}</a>
+    <ul class='nav nav-pills'>
+      <li><a class='nav-link' [routerLink]="['/home']" routerLinkActive="active">Home</a></li>
+      <li><a class='nav-link' [routerLink]="['/countries']" routerLinkActive="active">Affected Countries List</a></li>
+    </ul>
+    
+    
+    </nav>
+    <div class='container'>
+    <router-outlet></router-outlet>
+    </div>
+
+
