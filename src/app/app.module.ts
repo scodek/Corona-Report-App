@@ -4,10 +4,10 @@ import {HttpClientModule} from '@Angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { AllCountriesComponent } from './allcountry/all-countries.component';
-import { CountryListComponent } from './allcountry/country-list.component';
-import { PageNotFoundComponent } from './page-not-found.component';
+import { CountryListComponent } from './country-list/country-list.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { FormsModule } from '@angular/forms';
-import { CountryDetailComponent } from './allcountry/country-detail.component';
+import { CountryDetailComponent } from './country-detail/country-detail.component';
 
 const appRoutes : Routes = [
   {path:'home',component: AllCountriesComponent},
@@ -31,7 +31,7 @@ const appRoutes : Routes = [
     PageNotFoundComponent
   ],
   imports: [
-    RouterModule.forRoot(appRoutes, { enableTracing: true }),
+    RouterModule.forRoot(appRoutes),
     BrowserModule,
     HttpClientModule,
     FormsModule

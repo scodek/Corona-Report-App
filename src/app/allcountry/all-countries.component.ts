@@ -1,10 +1,11 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ArcGisService } from '../shared/arcgis.service';
-import { entryType } from './entryType';
+import { entryType } from '../entryType';
 import { KeyValue } from '@angular/common';
 import { } from 'googlemaps';
 /*import { GoogleMapApiService } from '../shared/google-map-api.service';*/
 import { } from 'googlemaps';
+import { CountryInfo } from '../country-info';
 
 @Component({
     selector: 'affected-countries',
@@ -20,7 +21,7 @@ export class AllCountriesComponent implements OnInit {
     marker = new google.maps.Marker({});
     markers = [];
 
-    result: any;
+    result: CountryInfo[];
     errorMessage: string;
     filteredResult: entryType[] = [];
     filteredResultFinal: {};
@@ -42,6 +43,7 @@ export class AllCountriesComponent implements OnInit {
         this.arcGisService.getAllCountryInfo().subscribe({
             next: result => {
                 this.result = result,
+                console.log("result : ",result);
                     this.filteredResultFinal = this.processResult(this.result),
                     this.getGoogleMap(),
                     this.markAffectedArea()
@@ -64,31 +66,33 @@ export class AllCountriesComponent implements OnInit {
         let k = 0;
         // console.log("type of filteredResult =" + typeof this.filteredResult); 
 
-        result.features.forEach((eachObj) => {
-            this.totalDeaths += parseInt(eachObj.attributes.Deaths, 10);
-            this.totalRecovered += parseInt(eachObj.attributes.Recovered, 10);
+        //result.features.forEach((eachObj) => {
+        result.forEach((eachObj) => {
+            //console.log("geaths : ", eachObj.deaths);
+            this.totalDeaths += parseInt(eachObj.deaths, 10);
+            this.totalRecovered += parseInt(eachObj.recovered, 10);
             let tempObj = {
-                'country': eachObj.attributes.Country_Region,
-                'confirmed': eachObj.attributes.Confirmed,
-                'state': eachObj.attributes.Province_State,
-                'recovered': eachObj.attributes.Recovered,
-                'deaths': eachObj.attributes.Deaths,
-                'active': eachObj.attributes.Active,
-                'lat': eachObj.attributes.Lat,
-                'long': eachObj.attributes.Long_
+                'country': eachObj.country,
+                'confirmed': eachObj.confirmed,
+                'state': eachObj.state,
+                'recovered': eachObj.recovered,
+                'deaths': eachObj.deaths,
+                'active': eachObj.active,
+                'lat': eachObj.lat,
+                'long': eachObj.long
             };
 
             this.filteredResult.push(tempObj);
 
-            if (!this.latLongObj.hasOwnProperty(eachObj.attributes.Country_Region)) {
-                this.latLongObj[eachObj.attributes.Country_Region] = { lat: eachObj.attributes.Lat, long: eachObj.attributes.Long_ };
+            if (!this.latLongObj.hasOwnProperty(eachObj.country)) {
+                this.latLongObj[eachObj.country] = { lat: eachObj.lat, long: eachObj.long };
             }
             //Since the arcgis brings sometimes multiple entries (state specific) for some big countries such
             // as China, US so I here calculated total confirmed cases
-            if (res.hasOwnProperty(eachObj.attributes.Country_Region)) {
-                res[eachObj.attributes.Country_Region] += eachObj.attributes.Confirmed;
+            if (res.hasOwnProperty(eachObj.country)) {
+                res[eachObj.country] += eachObj.confirmed;
             } else {
-                res[eachObj.attributes.Country_Region] = eachObj.attributes.Confirmed;
+                res[eachObj.country] = eachObj.confirmed;
             }
 
 

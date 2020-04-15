@@ -1,9 +1,10 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ArcGisService } from '../shared/arcgis.service';
-import { entryType } from './entryType';
+import { entryType } from '../entryType';
 import { } from 'googlemaps';
 import { NewsApiService } from '../shared/newsapi.service';
+import { CountryInfo } from '../country-info';
 
 
 @Component({
@@ -12,7 +13,7 @@ import { NewsApiService } from '../shared/newsapi.service';
 })
 export class CountryDetailComponent implements OnInit {
   pageTitle: string = "Country Detail";
-  result: any;
+  result: CountryInfo[];
   newsResult: any;
   filteredNews = [];
   countryProvince: entryType[] = [];
@@ -102,7 +103,7 @@ export class CountryDetailComponent implements OnInit {
   //THis process will create process country specific information
   processCountries(result, countryName) {
     let temp = [];
-    for (let eachObj of result.features) {
+    for (let eachObj of result) {
       // console.log("feature = "+ eachObj.attributes.Country_Region);
       if (eachObj.attributes.Country_Region === countryName) {
 

@@ -20,12 +20,10 @@
 <nav class='navbar navbar-expand' style="background:#ffbf80">
     <a class='navbar-brand'>{{pageTitle}}</a>
     <ul class='nav nav-pills'>
-      <li><a class='nav-link' [routerLink]="['/home']" routerLinkActive="active">Home</a></li>
-      <li><a class='nav-link' [routerLink]="['/countries']" routerLinkActive="active">Affected Countries List</a></li>
+      <li><a class='nav-link' [routerLink]="['/home']" >Home</a></li>
+      <li><a class='nav-link' [routerLink]="['/countries']">Affected Countries List</a></li>
     </ul>
-    
-    
-    </nav>
+</nav>
     <div class='container'>
     <router-outlet></router-outlet>
     </div>

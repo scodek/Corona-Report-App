@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { entryType } from './entryType';
+import { entryType } from '../entryType';
 import { ArcGisService } from '../shared/arcgis.service';
+import { CountryInfo } from '../country-info';
 
 @Component({
     selector: 'country-list',
@@ -9,7 +10,7 @@ import { ArcGisService } from '../shared/arcgis.service';
 export class CountryListComponent {
 
     pageTitle = 'List of Affected countires: ';
-    result: any;
+    result: CountryInfo[];
     errorMessage: string;
     filteredResult: entryType[] = [];
     res: {};
@@ -48,22 +49,22 @@ export class CountryListComponent {
             },
             error: err => this.errorMessage = err
         });
-        throw new Error("Method not implemented.");
+        
     }
 
     processResult(result) {
         //console.log("type of filteredResult =" + typeof this.filteredResult); 
-        for (let eachObj of result.features) {
-            console.log("feature = " + eachObj.attributes.Country_Region);
+        for (let eachObj of result) {
+            
             let tempObj = {
-                'country': eachObj.attributes.Country_Region,
-                'confirmed': eachObj.attributes.Confirmed,
-                'state': eachObj.attributes.Province_State,
-                'recovered': eachObj.attributes.Recovered,
-                'deaths': eachObj.attributes.Deaths,
-                'active': eachObj.attributes.Active,
-                'lat': eachObj.attributes.Lat,
-                'long': eachObj.attributes.Long_
+                'country': eachObj.country,
+                'confirmed': eachObj.confirmed,
+                'state': eachObj.state,
+                'recovered': eachObj.recovered,
+                'deaths': eachObj.deaths,
+                'active': eachObj.active,
+                'lat': eachObj.lat,
+                'long': eachObj.long
             };
             this.filteredResult.push(tempObj);
 

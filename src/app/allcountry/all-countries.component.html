@@ -24,13 +24,13 @@
 <th>Total deaths: {{totalDeaths}}</th>
 </thead>
 <thead>
-      <tr style="background: #e60000;">
+      <tr style="background: #ff6666;">
 <th>Country</th>
 <th>Confirmed</th>
 </tr>
 </thead>
 <tbody>
-<tr style="background: #4d4d4d;" *ngFor="let item of filteredResultFinal | keyvalue : originalOrder">
+<tr style="background: #4d4d4d;color : #ff1a1a" *ngFor="let item of filteredResultFinal | keyvalue : originalOrder">
 <td>{{item.key}}</td>
 <td>{{item.value}}</td>
 </tr>
